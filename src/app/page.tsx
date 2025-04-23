@@ -21,6 +21,7 @@ export interface Section {
 }
 
 // Content for the different sections (Using original image paths)
+// KEEP THIS DEFINITION INSIDE THE FILE
 const sectionsData: Section[] = [
   {
     id: 'windows',
@@ -62,14 +63,14 @@ const sectionsData: Section[] = [
     content: [
        { step: 1, title: 'Performance Issues', description: 'Lower Internal Res >> Enable "Performance" mode >> Use Hybrid Ubershaders.' },
        { step: 2, title: 'Game-Specific Fixes', description: 'Consult the Dolphin Wiki (wiki.dolphin-emu.org) for game compatibility & settings.' },
-       { step: '!', title: 'Newer macOS Warning', description: 'Dolphin may struggle on recent macOS versions due to blocks from Apple. Consider running on Windows.' },
+       { step: '!', title: 'Newer macOS Warning', description: 'Dolphin may struggle on recent macOS versions (Apple Silicon/Metal). Consider running on Windows (PC/Boot Camp/Parallels) for better stability.' },
     ],
     bg: '/images/troubleshooting-bg.jpg', // Original Path
   },
 ];
 
-// Export sections for use in ParallaxSection's click handler
-export const sections = sectionsData;
+// REMOVED THE EXPORT LINE BELOW - NO LONGER NEEDED AND CAUSES ERROR
+// export const sections = sectionsData;
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -85,20 +86,19 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="max-w-3xl mx-auto bg-black/60 border border-green-700/40 p-6 rounded-sm shadow-lg shadow-green-900/20 backdrop-blur-sm" // Simplified border/bg
+            className="max-w-3xl mx-auto bg-black/60 border border-green-700/40 p-6 rounded-sm shadow-lg shadow-green-900/20 backdrop-blur-sm"
           >
-             {/* Removed // from title */}
             <h2 className="text-2xl font-semibold text-green-300 mb-4">Dolphin: GameCube & Wii Emulator</h2>
-             {/* Removed > from paragraph start */}
             <p className="text-green-400/90 leading-relaxed text-sm">
-               Dolphin emulates Nintendo&apos;s GameCube and Wii consoles. The GameCube hosted classics <em className="text-green-200 not-italic font-medium">Super Smash Bros. Melee</em> and <em className="text-green-200 not-italic font-medium">Metroid Prime</em>. The Wii changed history with motion controls, bringing hits like <em className="text-green-200 not-italic font-medium">Wii Sports</em> and <em className="text-green-200 not-italic font-medium">Super Mario Galaxy</em>. Dolphin lets you experience these platforms on modern PCs and Android.
+               Dolphin emulates Nintendo's 6th (GameCube) and 7th (Wii) generation consoles. The GameCube, known for its compact design and unique controller, hosted classics like <em className="text-green-200 not-italic font-medium">Super Smash Bros. Melee</em> and <em className="text-green-200 not-italic font-medium">Metroid Prime</em>. The Wii revolutionized gaming with motion controls, bringing hits like <em className="text-green-200 not-italic font-medium">Wii Sports</em> and <em className="text-green-200 not-italic font-medium">Super Mario Galaxy</em>. Dolphin lets you experience these platforms on modern PCs.
             </p>
         </motion.div>
       </div>
 
       {/* Sections Container */}
       <div ref={containerRef} className="relative">
-        {sections.map((section, index) => (
+        {/* Use sectionsData directly here */}
+        {sectionsData.map((section, index) => (
           <ParallaxSection
             key={section.id}
             section={section}
