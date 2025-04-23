@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Section, sections } from '../page'; // Adjust path if needed
+import { Section} from '../page'; // Adjust path if needed
 
 interface ParallaxSectionProps {
   section: Section;

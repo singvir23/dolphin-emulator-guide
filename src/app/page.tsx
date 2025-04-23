@@ -91,7 +91,7 @@ export default function Home() {
             <h2 className="text-2xl font-semibold text-green-300 mb-4">Dolphin: GameCube & Wii Emulator</h2>
              {/* Removed > from paragraph start */}
             <p className="text-green-400/90 leading-relaxed text-sm">
-               Dolphin emulates Nintendo's GameCube and Wii consoles. The GameCube hosted classics <em className="text-green-200 not-italic font-medium">Super Smash Bros. Melee</em> and <em className="text-green-200 not-italic font-medium">Metroid Prime</em>. The Wii changed history with motion controls, bringing hits like <em className="text-green-200 not-italic font-medium">Wii Sports</em> and <em className="text-green-200 not-italic font-medium">Super Mario Galaxy</em>. Dolphin lets you experience these platforms on modern PCs and Android.
+               Dolphin emulates Nintendo&apos;s GameCube and Wii consoles. The GameCube hosted classics <em className="text-green-200 not-italic font-medium">Super Smash Bros. Melee</em> and <em className="text-green-200 not-italic font-medium">Metroid Prime</em>. The Wii changed history with motion controls, bringing hits like <em className="text-green-200 not-italic font-medium">Wii Sports</em> and <em className="text-green-200 not-italic font-medium">Super Mario Galaxy</em>. Dolphin lets you experience these platforms on modern PCs and Android.
             </p>
         </motion.div>
       </div>
