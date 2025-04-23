@@ -1,103 +1,114 @@
-import Image from "next/image";
+'use client';
+
+import React, { useRef } from 'react';
+import Header from './components/Header';
+import ParallaxSection from './components/ParallaxSection';
+import Footer from './components/Footer';
+import { motion } from 'framer-motion';
+
+// Define types for section content
+export interface StepContent {
+  step: number | string;
+  title: string;
+  description: string;
+}
+
+export interface Section {
+  id: string;
+  title: string;
+  content: StepContent[];
+  bg: string; // Using original image paths
+}
+
+// Content for the different sections (Using original image paths)
+const sectionsData: Section[] = [
+  {
+    id: 'windows',
+    title: 'Windows Setup',
+    content: [
+       { step: 1, title: 'Download Dolphin', description: 'Visit dolphin-emu.org >> Download latest dev build (Win x64).' },
+       { step: 2, title: 'Extract Files', description: 'Unzip archive >> Place folder (e.g., C:\\Emulators\\Dolphin\\).' },
+       { step: 3, title: 'Configure Dolphin', description: 'Run Dolphin.exe >> Set Graphics (Direct3D/Vulkan) & Controllers.' },
+       { step: 4, title: 'Add Games', description: 'Config > Paths > Add... >> Select game file directory (ISO/GCM/etc).' },
+       { step: 5, title: 'Launch!', description: 'Double-click game >> Alt+Enter (Fullscreen) >> Esc (Stop).' },
+    ],
+    bg: '/images/windows.png', // Original Path
+  },
+  {
+    id: 'mac',
+    title: 'macOS Setup',
+    content: [
+       { step: 1, title: 'Download Dolphin', description: 'Visit dolphin-emu.org >> Grab macOS Universal .DMG.' },
+       { step: 2, title: 'Install', description: 'Open .DMG >> Drag Dolphin.app to Applications folder.' },
+       { step: 3, title: 'Launch', description: 'Open Dolphin >> Security warning? Ctrl+Click > "Open".' },
+       { step: 4, title: 'Configure', description: 'Setup Graphics (Metal recommended) & Controllers via Preferences.' },
+       { step: 5, title: 'Add Games', description: 'Set game paths >> Tweak game-specific settings if needed.' },
+    ],
+    bg: '/images/apple.png', // Original Path
+  },
+  {
+    id: 'controller',
+    title: 'Controller Setup',
+    content: [
+       { step: 1, title: 'GameCube Input', description: 'Use official/third-party USB GC Adapter or map standard controller.' },
+       { step: 2, title: 'Wii Remote Input', description: 'Map standard controller as emulated Wiimote OR connect real Wiimotes (Bluetooth).' },
+       { step: 3, title: 'Motion Controls', description: 'Requires real Wiimotes OR map motion to analog sticks/gyro (if available).' },
+    ],
+    bg: '/images/wiimote.png', // Original Path
+  },
+  {
+    id: 'troubleshooting',
+    title: 'Troubleshooting',
+    content: [
+       { step: 1, title: 'Performance Issues', description: 'Lower Internal Res >> Enable "Performance" mode >> Use Hybrid Ubershaders.' },
+       { step: 2, title: 'Game-Specific Fixes', description: 'Consult the Dolphin Wiki (wiki.dolphin-emu.org) for game compatibility & settings.' },
+       { step: '!', title: 'Newer macOS Warning', description: 'Dolphin may struggle on recent macOS versions due to blocks from Apple. Consider running on Windows.' },
+    ],
+    bg: '/images/troubleshooting-bg.jpg', // Original Path
+  },
+];
+
+// Export sections for use in ParallaxSection's click handler
+export const sections = sectionsData;
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const containerRef = useRef<HTMLDivElement>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  return (
+    // Apply base styles: black background, green text, chosen font
+    <main className="min-h-screen bg-black text-green-400 font-tech">
+      <Header />
+
+      {/* Intro Paragraph */}
+      <div className="relative pt-28 pb-12 container mx-auto px-6 z-10">
+         <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="max-w-3xl mx-auto bg-black/60 border border-green-700/40 p-6 rounded-sm shadow-lg shadow-green-900/20 backdrop-blur-sm" // Simplified border/bg
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+             {/* Removed // from title */}
+            <h2 className="text-2xl font-semibold text-green-300 mb-4">Dolphin: GameCube & Wii Emulator</h2>
+             {/* Removed > from paragraph start */}
+            <p className="text-green-400/90 leading-relaxed text-sm">
+               Dolphin emulates Nintendo's GameCube and Wii consoles. The GameCube hosted classics <em className="text-green-200 not-italic font-medium">Super Smash Bros. Melee</em> and <em className="text-green-200 not-italic font-medium">Metroid Prime</em>. The Wii changed history with motion controls, bringing hits like <em className="text-green-200 not-italic font-medium">Wii Sports</em> and <em className="text-green-200 not-italic font-medium">Super Mario Galaxy</em>. Dolphin lets you experience these platforms on modern PCs and Android.
+            </p>
+        </motion.div>
+      </div>
+
+      {/* Sections Container */}
+      <div ref={containerRef} className="relative">
+        {sections.map((section, index) => (
+          <ParallaxSection
+            key={section.id}
+            section={section}
+            index={index}
+            containerRef={containerRef as React.RefObject<HTMLDivElement>}
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        ))}
+      </div>
+
+      <Footer />
+    </main>
   );
 }
