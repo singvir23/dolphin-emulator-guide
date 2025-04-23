@@ -90,7 +90,7 @@ export default function Home() {
           >
             <h2 className="text-2xl font-semibold text-green-300 mb-4">Dolphin: GameCube & Wii Emulator</h2>
             <p className="text-green-400/90 leading-relaxed text-sm">
-               Dolphin emulates Nintendo's 6th (GameCube) and 7th (Wii) generation consoles. The GameCube, known for its compact design and unique controller, hosted classics like <em className="text-green-200 not-italic font-medium">Super Smash Bros. Melee</em> and <em className="text-green-200 not-italic font-medium">Metroid Prime</em>. The Wii revolutionized gaming with motion controls, bringing hits like <em className="text-green-200 not-italic font-medium">Wii Sports</em> and <em className="text-green-200 not-italic font-medium">Super Mario Galaxy</em>. Dolphin lets you experience these platforms on modern PCs.
+               Dolphin emulates Nintendo&apos;s 6th (GameCube) and 7th (Wii) generation consoles. The GameCube, known for its compact design and unique controller, hosted classics like <em className="text-green-200 not-italic font-medium">Super Smash Bros. Melee</em> and <em className="text-green-200 not-italic font-medium">Metroid Prime</em>. The Wii revolutionized gaming with motion controls, bringing hits like <em className="text-green-200 not-italic font-medium">Wii Sports</em> and <em className="text-green-200 not-italic font-medium">Super Mario Galaxy</em>. Dolphin lets you experience these platforms on modern PCs.
             </p>
         </motion.div>
       </div>
